@@ -24,6 +24,7 @@
     ]
   },
   "mixins": [
+    "quickbind.mixins.json"
   ],
 
   "depends": {
