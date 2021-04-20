@@ -97,7 +97,6 @@ public class ConfigFile {
         // get commands.json
         // remove corresponding button from json
         removeFromFile(objToRemove);
-
     }
 
 
