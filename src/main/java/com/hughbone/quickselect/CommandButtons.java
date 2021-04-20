@@ -1,7 +1,6 @@
 package com.hughbone.quickselect;
 
-
-
+import com.hughbone.quickselect.commands.TestCommand;
 import com.hughbone.quickselect.gui.ButtonGUI;
 import com.hughbone.quickselect.gui.ButtonGUIScreen;
 import net.fabricmc.api.ModInitializer;
@@ -28,8 +27,9 @@ public class CommandButtons implements ModInitializer {
     public void onInitialize() {
         assignGuiToKey();
         initArray();
-    }
 
+        TestCommand.init();
+    }
 
     private void assignGuiToKey() {
         // Currently assigns to the G key
@@ -43,7 +43,6 @@ public class CommandButtons implements ModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (keyBinding.wasPressed()) {
                 MinecraftClient.getInstance().openScreen(new ButtonGUIScreen(new ButtonGUI()));
-                //client.player.closeScreen();
             }
         });
     }
