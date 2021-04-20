@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "id": "command-gui-buttons",
+  "version": "${version}",
+
+  "name": "Command GUI Buttons",
+  "description": "Create GUI buttons in-game to execute commands.",
+  "authors": [
+    "JosephG",
+    "Abbanon"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/command-gui-buttons",
+    "sources": "https://github.com/joseph-garcia/command-gui-buttons"
+  },
+
+  "license": "gpl-3.0",
+  "icon": "assets/mgbuttons/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.hughbone.quickselect.CommandButtons"
+    ]
+  },
+  "mixins": [
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x",
+    "fabric-key-binding-api-v1": "*"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}
