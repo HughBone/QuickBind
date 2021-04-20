@@ -27,6 +27,7 @@ public class ButtonGUI extends LightweightGuiDescription {
     }
 
     private void addButton() {
+        HughButton.hughButtonList.clear();
         HughButton buttona = new HughButton(new LiteralText("A"), "");
         HughButton buttonb = new HughButton(new LiteralText("B"), "");
         HughButton buttonc = new HughButton(new LiteralText("C"), "");
