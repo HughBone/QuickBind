@@ -1,6 +1,5 @@
-package com.hughbone.quickselect;
+package com.hughbone.quickbind;
 
 public interface KeyExt {
     void pressKey();
-
 }

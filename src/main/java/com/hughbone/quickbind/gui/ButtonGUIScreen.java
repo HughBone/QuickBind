@@ -1,4 +1,4 @@
-package com.hughbone.quickselect.gui;
+package com.hughbone.quickbind.gui;
 
 import io.github.cottonmc.cotton.gui.GuiDescription;
 import io.github.cottonmc.cotton.gui.client.CottonClientScreen;

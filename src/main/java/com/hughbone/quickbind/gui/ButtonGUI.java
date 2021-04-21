@@ -1,4 +1,4 @@
-package com.hughbone.quickselect.gui;
+package com.hughbone.quickbind.gui;
 
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
@@ -27,23 +27,23 @@ public class ButtonGUI extends LightweightGuiDescription {
     }
 
     private void addButton() {
-        HughButton.hughButtonList.clear();
-        HughButton buttona = new HughButton(new LiteralText("A"), "");
-        HughButton buttonb = new HughButton(new LiteralText("B"), "");
-        HughButton buttonc = new HughButton(new LiteralText("C"), "");
-        HughButton buttond = new HughButton(new LiteralText("D"), "");
-        HughButton button1 = new HughButton(new LiteralText("1"), "");
-        HughButton button2 = new HughButton(new LiteralText("2"), "");
-        HughButton button3 = new HughButton(new LiteralText("3"), "");
-        HughButton button4 = new HughButton(new LiteralText("4"), "");
-        HughButton button5 = new HughButton(new LiteralText("5"), "");
-        HughButton button6 = new HughButton(new LiteralText("6"), "");
-        HughButton button7 = new HughButton(new LiteralText("7"), "");
-        HughButton button8 = new HughButton(new LiteralText("8"), "");
-        HughButton button9 = new HughButton(new LiteralText("9"), "");
-        HughButton button10 = new HughButton(new LiteralText("10"), "");
-        HughButton button11 = new HughButton(new LiteralText("11"), "");
-        HughButton button12 = new HughButton(new LiteralText("12"), "");
+        MacroButton.macroButtonList.clear();
+        MacroButton buttona = new MacroButton(new LiteralText("A"), "");
+        MacroButton buttonb = new MacroButton(new LiteralText("B"), "");
+        MacroButton buttonc = new MacroButton(new LiteralText("C"), "");
+        MacroButton buttond = new MacroButton(new LiteralText("D"), "");
+        MacroButton button1 = new MacroButton(new LiteralText("1"), "");
+        MacroButton button2 = new MacroButton(new LiteralText("2"), "");
+        MacroButton button3 = new MacroButton(new LiteralText("3"), "");
+        MacroButton button4 = new MacroButton(new LiteralText("4"), "");
+        MacroButton button5 = new MacroButton(new LiteralText("5"), "");
+        MacroButton button6 = new MacroButton(new LiteralText("6"), "");
+        MacroButton button7 = new MacroButton(new LiteralText("7"), "");
+        MacroButton button8 = new MacroButton(new LiteralText("8"), "");
+        MacroButton button9 = new MacroButton(new LiteralText("9"), "");
+        MacroButton button10 = new MacroButton(new LiteralText("10"), "");
+        MacroButton button11 = new MacroButton(new LiteralText("11"), "");
+        MacroButton button12 = new MacroButton(new LiteralText("12"), "");
 
         root.add(buttona, 8, 4, 1, 1);
         root.add(buttonb, 9, 5, 1, 1);
@@ -62,7 +62,6 @@ public class ButtonGUI extends LightweightGuiDescription {
         root.add(button11, 4, 4, 1, 1);
         root.add(button12, 5, 2, 1, 1);
     }
-
 
     // Change background panel color to transparent black
     @Override

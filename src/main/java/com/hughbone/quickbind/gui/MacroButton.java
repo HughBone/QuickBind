@@ -1,9 +1,7 @@
-package com.hughbone.quickselect.gui;
+package com.hughbone.quickbind.gui;
 
-import com.hughbone.quickselect.KeyExt;
-import com.hughbone.quickselect.Main;
-import com.hughbone.quickselect.commands.TestCommand;
-import com.hughbone.quickselect.SaveJson;
+import com.hughbone.quickbind.KeyExt;
+import com.hughbone.quickbind.Main;
 import io.github.cottonmc.cotton.gui.widget.TooltipBuilder;
 import io.github.cottonmc.cotton.gui.widget.WButton;
 import net.minecraft.client.MinecraftClient;
@@ -21,27 +19,23 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class HughButton extends WButton {
+public class MacroButton extends WButton {
 
     public String toolText;
     public String chatCommand;
     public KeyBinding keyBinding;
-    public static List<HughButton> hughButtonList = new ArrayList<HughButton>();
+    public static List<MacroButton> macroButtonList = new ArrayList<MacroButton>();
 
-    public HughButton(LiteralText test, String hoverText) {
-        super(test);
+    public MacroButton(LiteralText text, String hoverText) {
+        super(text);
         this.toolText = hoverText;
         addTooltip(new TooltipBuilder());
-        hughButtonList.add(this);
+        macroButtonList.add(this);
         loadButton();
 
         this.setOnClick(() -> {
             if (ButtonGUI.configToggle.getToggle()) {
-                this.keyBinding = TestCommand.kb;
-                this.toolText = TestCommand.kb.getTranslationKey();
-
-                SaveJson.save();
-                configButton();
+                MinecraftClient.getInstance().openScreen(new ButtonGUIScreen(new HotkeyGUI()));
             }
             else {
                 if (keyBinding != null) {
@@ -55,9 +49,6 @@ public class HughButton extends WButton {
     @Override
     public void addTooltip(TooltipBuilder tooltip) {
         tooltip.add(new LiteralText(toolText));
-    }
-
-    private void configButton() {
     }
 
     private void loadButton() {

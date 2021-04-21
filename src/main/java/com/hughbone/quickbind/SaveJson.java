@@ -1,6 +1,6 @@
-package com.hughbone.quickselect;
+package com.hughbone.quickbind;
 
-import com.hughbone.quickselect.gui.HughButton;
+import com.hughbone.quickbind.gui.MacroButton;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -10,7 +10,7 @@ import java.io.FileWriter;
 public class SaveJson {
     public static void save() {
         JSONArray jsonArray = new JSONArray();
-        for (HughButton hb : HughButton.hughButtonList) {
+        for (MacroButton hb : MacroButton.macroButtonList) {
             try {
                 JSONObject buttonField = new JSONObject();
                 buttonField.put("hover-text", hb.toolText);

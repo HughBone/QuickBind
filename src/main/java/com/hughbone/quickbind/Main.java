@@ -1,8 +1,8 @@
-package com.hughbone.quickselect;
+package com.hughbone.quickbind;
 
-import com.hughbone.quickselect.commands.TestCommand;
-import com.hughbone.quickselect.gui.ButtonGUI;
-import com.hughbone.quickselect.gui.ButtonGUIScreen;
+import com.hughbone.quickbind.commands.TestCommand;
+import com.hughbone.quickbind.gui.ButtonGUI;
+import com.hughbone.quickbind.gui.ButtonGUIScreen;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -13,9 +13,11 @@ import org.json.simple.JSONObject;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
+import java.util.Map;
 
-public class CommandButtons implements ModInitializer {
+public class Main implements ModInitializer {
 
+    public static Map<String, KeyBinding> keyBindings;
     public static final String MOD_ID = "mgbuttons";
     private static ArrayList<JSONObject> masterCommList;
 

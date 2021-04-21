@@ -1,4 +1,4 @@
-package com.hughbone.quickselect;
+package com.hughbone.quickbind;
 
 import com.alibaba.fastjson.JSON;
 import com.cedarsoftware.util.io.JsonWriter;
@@ -84,14 +84,14 @@ public class ConfigFile {
     }
 
     public static void addObjectToCommList(JSONObject jsonObject) {
-        ArrayList<JSONObject> commListCopy = CommandButtons.getMasterCommList();
+        ArrayList<JSONObject> commListCopy = Main.getMasterCommList();
         commListCopy.add(jsonObject);
-        CommandButtons.setMasterCommList(commListCopy);
+        Main.setMasterCommList(commListCopy);
     }
 
     public static void removeObject(JSONObject objToRemove) {
         // get masterCommList and remove object from list
-        ArrayList<JSONObject> commListCopy = CommandButtons.getMasterCommList();
+        ArrayList<JSONObject> commListCopy = Main.getMasterCommList();
         commListCopy.remove(objToRemove);
 
         // get commands.json
