@@ -1,8 +1,10 @@
 package com.hughbone.quickbind.gui;
 
+import com.hughbone.quickbind.SaveJson;
 import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WScrollPanel;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 
 public class NormalButton extends WButton {
@@ -12,8 +14,8 @@ public class NormalButton extends WButton {
 
         this.setOnClick(() -> {
 
-            if (this.getLabel().getString().equals("APPLY")) {
-
+            if (this.getLabel().getString().equals("[Select]")) {
+                MinecraftClient.getInstance().openScreen(new GUIScreen(new HotkeyGUI()));
             }
 
             else if (this.getLabel().getString().equals("SEARCH")) {
@@ -31,7 +33,6 @@ public class NormalButton extends WButton {
                 }
                 HotkeyGUI.scrollPanel = new WScrollPanel(panel);
                 HotkeyGUI.root.add(HotkeyGUI.scrollPanel, 0, 0, 17, 9);
-
             }
         });
     }
