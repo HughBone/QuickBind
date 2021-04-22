@@ -24,7 +24,6 @@ public class Main implements ModInitializer {
     @Override
     public void onInitialize() {
         assignGuiToKey();
-        initArray();
     }
 
     private void assignGuiToKey() {
@@ -41,23 +40,6 @@ public class Main implements ModInitializer {
                 MinecraftClient.getInstance().openScreen(new GUIScreen(new MacroGUI()));
             }
         });
-    }
-
-    // Assign masterCommList to JSONArray<objects> (from commands.json). Runs once.
-    static void initArray() {
-        masterCommList = ConfigFile.getArrayFromJsonFile();
-        // If commands.json doesn't exist yet, start a global list variable for future creation
-        if (masterCommList == null) {
-            setMasterCommList(new ArrayList<>());
-        }
-    }
-
-    public static ArrayList<JSONObject> getMasterCommList() {
-        return masterCommList;
-    }
-
-    public static void setMasterCommList(ArrayList<JSONObject> commList) {
-        masterCommList = commList;
     }
 
 }
