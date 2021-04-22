@@ -3,19 +3,18 @@
   "id": "command-gui-buttons",
   "version": "${version}",
 
-  "name": "Command GUI Buttons",
-  "description": "Create GUI buttons in-game to execute commands.",
+  "name": "QuickBind",
+  "description": "Create and bind GUI buttons to keybinds or chat commands.",
   "authors": [
-    "JosephG",
-    "Abbanon"
+    "HughBone"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/command-gui-buttons",
-    "sources": "https://github.com/joseph-garcia/command-gui-buttons"
+    "homepage": "",
+    "sources": "https://github.com/HughBone/QuickBind"
   },
 
-  "license": "gpl-3.0",
-  "icon": "assets/mgbuttons/icon.png",
+  "license": "MIT",
+  "icon": "assets/quickbind/icon.png",
 
   "environment": "*",
   "entrypoints": {

@@ -17,27 +17,23 @@ import java.util.Map;
 public class Main implements ModInitializer {
 
     public static Map<String, KeyBinding> keyBindings;
-    public static final String MOD_ID = "mgbuttons";
     private static ArrayList<JSONObject> masterCommList;
 
-    public static void main(String[] args) {
-
-    }
+    public static void main(String[] args) {}
 
     @Override
     public void onInitialize() {
         assignGuiToKey();
         initArray();
-
     }
 
     private void assignGuiToKey() {
         // Currently assigns to the G key
         KeyBinding keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.commandbuttons.opengui", // The translation key of the keybinding's name
+                "key.quickbind.opengui", // The translation key of the keybinding's name
                 InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
                 GLFW.GLFW_KEY_G, // The keycode of the key
-                "gui.commandbuttons.mgbuttons" // The translation key of the keybinding's category.
+                "gui.quickbind.buttons" // The translation key of the keybinding's category.
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
@@ -45,10 +41,6 @@ public class Main implements ModInitializer {
                 MinecraftClient.getInstance().openScreen(new GUIScreen(new MacroGUI()));
             }
         });
-    }
-
-    public static void runCommand(String command) {
-        MinecraftClient.getInstance().player.sendChatMessage(command);
     }
 
     // Assign masterCommList to JSONArray<objects> (from commands.json). Runs once.
