@@ -20,7 +20,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.hughbone.quickselect.CommandButtons"
+      "com.hughbone.quickbind.Main"
     ]
   },
   "mixins": [

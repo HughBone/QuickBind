@@ -1,8 +1,7 @@
 package com.hughbone.quickbind;
 
-import com.hughbone.quickbind.commands.TestCommand;
-import com.hughbone.quickbind.gui.ButtonGUI;
-import com.hughbone.quickbind.gui.ButtonGUIScreen;
+import com.hughbone.quickbind.gui.MacroGUI;
+import com.hughbone.quickbind.gui.GUIScreen;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -30,7 +29,6 @@ public class Main implements ModInitializer {
         assignGuiToKey();
         initArray();
 
-        TestCommand.init();
     }
 
     private void assignGuiToKey() {
@@ -44,7 +42,7 @@ public class Main implements ModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (keyBinding.wasPressed()) {
-                MinecraftClient.getInstance().openScreen(new ButtonGUIScreen(new ButtonGUI()));
+                MinecraftClient.getInstance().openScreen(new GUIScreen(new MacroGUI()));
             }
         });
     }

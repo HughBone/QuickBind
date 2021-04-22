@@ -2,7 +2,6 @@ package com.hughbone.quickbind.mixin;
 
 import com.hughbone.quickbind.KeyExt;
 import com.hughbone.quickbind.Main;
-import com.hughbone.quickbind.commands.TestCommand;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.spongepowered.asm.mixin.Final;
@@ -29,8 +28,5 @@ public class KeyBindingMixin implements KeyExt {
     @Inject(method = "<init>(Ljava/lang/String;Lnet/minecraft/client/util/InputUtil$Type;ILjava/lang/String;)V", at = @At("TAIL"))
     public void KeyBinding(String translationKey, InputUtil.Type type, int code, String category, CallbackInfo ci) {
         Main.keyBindings = keysById;
-        if (translationKey.contains("inventory")) {
-            TestCommand.kb = (KeyBinding)(Object)this;
-        }
     }
 }

@@ -7,12 +7,13 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.*;
 
 
-public class ButtonGUI extends LightweightGuiDescription {
+public class MacroGUI extends LightweightGuiDescription {
 
     private WGridPanel root = new WGridPanel();
-    public static WToggleButton configToggle;
+    public static WToggleButton configToggle = new WToggleButton(new TranslatableText("Config"));
 
-    public ButtonGUI() {
+
+    public MacroGUI() {
         addButton();
         addConfigToggle();
         addCloseButton();
@@ -22,7 +23,7 @@ public class ButtonGUI extends LightweightGuiDescription {
     }
 
     private void addConfigToggle() {
-        configToggle = new WToggleButton(new TranslatableText("Config"));
+        configToggle.setColor(16777215, 16777215);
         root.add(configToggle, 0, 0, 2, 1);
     }
 
