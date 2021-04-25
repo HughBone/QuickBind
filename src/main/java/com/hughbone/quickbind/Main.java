@@ -8,16 +8,13 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import org.json.simple.JSONObject;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class Main implements ModInitializer {
 
     public static Map<String, KeyBinding> keyBindings;
-    private static ArrayList<JSONObject> masterCommList;
 
     public static void main(String[] args) {}
 
@@ -43,4 +40,3 @@ public class Main implements ModInitializer {
     }
 
 }
-

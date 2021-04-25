@@ -6,12 +6,15 @@ import io.github.cottonmc.cotton.gui.widget.*;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MacroGUI extends LightweightGuiDescription {
 
     private WGridPanel root = new WGridPanel();
     public static WToggleButton configToggle = new WToggleButton(new TranslatableText("Config"));
-
+    public static List<MacroButton> macroBtnList;
 
     public MacroGUI() {
         addButton();
@@ -28,40 +31,14 @@ public class MacroGUI extends LightweightGuiDescription {
     }
 
     private void addButton() {
-        MacroButton.macroButtonList.clear();
-        MacroButton buttona = new MacroButton(new LiteralText("A"), "");
-        MacroButton buttonb = new MacroButton(new LiteralText("B"), "");
-        MacroButton buttonc = new MacroButton(new LiteralText("C"), "");
-        MacroButton buttond = new MacroButton(new LiteralText("D"), "");
-        MacroButton button1 = new MacroButton(new LiteralText("1"), "");
-        MacroButton button2 = new MacroButton(new LiteralText("2"), "");
-        MacroButton button3 = new MacroButton(new LiteralText("3"), "");
-        MacroButton button4 = new MacroButton(new LiteralText("4"), "");
-        MacroButton button5 = new MacroButton(new LiteralText("5"), "");
-        MacroButton button6 = new MacroButton(new LiteralText("6"), "");
-        MacroButton button7 = new MacroButton(new LiteralText("7"), "");
-        MacroButton button8 = new MacroButton(new LiteralText("8"), "");
-        MacroButton button9 = new MacroButton(new LiteralText("9"), "");
-        MacroButton button10 = new MacroButton(new LiteralText("10"), "");
-        MacroButton button11 = new MacroButton(new LiteralText("11"), "");
-        MacroButton button12 = new MacroButton(new LiteralText("12"), "");
+        macroBtnList = new ArrayList<>();
 
-        root.add(buttona, 8, 4, 1, 1);
-        root.add(buttonb, 9, 5, 1, 1);
-        root.add(buttonc, 8, 6, 1, 1);
-        root.add(buttond, 7, 5, 1, 1);
-        root.add(button1, 7, 1, 1, 1);
-        root.add(button2, 9, 1, 1, 1);
-        root.add(button3, 11, 2, 1, 1);
-        root.add(button4, 12, 4, 1, 1);
-        root.add(button5, 12, 6, 1, 1);
-        root.add(button6, 11, 8, 1, 1);
-        root.add(button7, 9, 9, 1, 1);
-        root.add(button8, 7, 9, 1, 1);
-        root.add(button9, 5, 8, 1, 1);
-        root.add(button10, 4, 6, 1, 1);
-        root.add(button11, 4, 4, 1, 1);
-        root.add(button12, 5, 2, 1, 1);
+        for (int i = 1; i <= 24; i++) {
+            MacroButton button = new MacroButton(""+i);
+            macroBtnList.add(button);
+        }
+        addToRoot();
+
     }
 
     // Change background panel color to transparent black
@@ -75,6 +52,38 @@ public class MacroGUI extends LightweightGuiDescription {
         WButton escButton = new WButton(new TranslatableText("x"));
         escButton.setOnClick(() -> MinecraftClient.getInstance().player.closeScreen());
         root.add(escButton, 15, 0, 2, 2);
+    }
+
+    private void addToRoot() {
+        // circle
+        root.add(macroBtnList.get(0), 7, 1, 1, 1);
+        root.add(macroBtnList.get(1), 9, 1, 1, 1);
+        root.add(macroBtnList.get(2), 11, 2, 1, 1);
+        root.add(macroBtnList.get(3), 12, 4, 1, 1);
+        root.add(macroBtnList.get(4), 12, 6, 1, 1);
+        root.add(macroBtnList.get(5), 11, 8, 1, 1);
+        root.add(macroBtnList.get(6), 9, 9, 1, 1);
+        root.add(macroBtnList.get(7), 7, 9, 1, 1);
+        root.add(macroBtnList.get(8), 5, 8, 1, 1);
+        root.add(macroBtnList.get(9), 4, 6, 1, 1);
+        root.add(macroBtnList.get(10), 4, 4, 1, 1);
+        root.add(macroBtnList.get(11), 5, 2, 1, 1);
+        // inner circle
+        root.add(macroBtnList.get(12), 8, 4, 1, 1);
+        root.add(macroBtnList.get(13), 9, 5, 1, 1);
+        root.add(macroBtnList.get(14), 8, 6, 1, 1);
+        root.add(macroBtnList.get(15), 7, 5, 1, 1);
+        // left side
+        root.add(macroBtnList.get(16), 1, 2, 1, 1);
+        root.add(macroBtnList.get(17), 0, 4, 1, 1);
+        root.add(macroBtnList.get(18), 0, 6, 1, 1);
+        root.add(macroBtnList.get(19), 1, 8, 1, 1);
+        // right side
+        root.add(macroBtnList.get(20), 15, 2, 1, 1);
+        root.add(macroBtnList.get(21), 16, 4, 1, 1);
+        root.add(macroBtnList.get(22), 16, 6, 1, 1);
+        root.add(macroBtnList.get(23), 15, 8, 1, 1);
+
     }
 
 }

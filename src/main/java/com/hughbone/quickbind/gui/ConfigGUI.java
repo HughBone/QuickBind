@@ -21,7 +21,6 @@ public class ConfigGUI extends LightweightGuiDescription {
     private static ConfigTextField chatCommandTextField;
 
     public ConfigGUI(boolean fillPrevForms) {
-
         WGridPanel root = new WGridPanel();
 
         root.add(new WText(Text.of("Name: ")).setColor(16777215), 0, 1, 3, 1);
@@ -44,23 +43,26 @@ public class ConfigGUI extends LightweightGuiDescription {
 
         root.add(new NormalButton(Text.of("[Select]")), 4, 7, 3, 1);
 
-
         WText keybindText = new WText(Text.of(""));
         keybindText.setColor(16777215);
-        if (fillPrevForms) {
-            keybindText.setText(Text.of(I18n.translate(keyBinding.getTranslationKey())));
-            root.add(keybindText, 8, 7, 8, 1);
-        }
-        else if (MacroButton.clickedBtn.keyBinding != null) {
+        if (MacroButton.clickedBtn.keyBinding != null) {
             keybindText.setText(Text.of(I18n.translate(MacroButton.clickedBtn.keyBinding.getTranslationKey())));
             root.add(keybindText, 8, 7, 8, 1);
         }
-
+        if (fillPrevForms) {
+            if (keyBinding != null) {
+                keybindText.setText(Text.of(I18n.translate(keyBinding.getTranslationKey())));
+                root.add(keybindText, 8, 7, 8, 1);
+            }
+            else {
+                keybindText.setText(Text.of(""));
+            }
+        }
 
         WButton resetBtn = new WButton(Text.of("RESET"));
         root.add(resetBtn, 0, 11, 3, 2);
         resetBtn.setOnClick(() -> {
-            nameTextField.setText(MacroButton.clickedBtn.defaultName);
+            nameTextField.setText("");
             hoverTextField.setText("");
             chatCommandTextField.setText("");
             colorTextField.setText("ffffff");

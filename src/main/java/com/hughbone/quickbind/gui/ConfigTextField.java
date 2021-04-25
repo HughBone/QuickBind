@@ -10,7 +10,6 @@ public class ConfigTextField extends WTextField {
         this.name = name;
         this.setMaxLength(100);
 
-
         if (name.equals("name")) {
             this.setText(MacroButton.clickedBtn.getLabel().getString());
         }

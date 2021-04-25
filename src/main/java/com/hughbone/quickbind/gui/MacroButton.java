@@ -20,31 +20,25 @@ import org.json.simple.parser.ParseException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 public class MacroButton extends WButton {
 
-    public int buttonColor;
-    public String defaultName;
+    public int buttonColor = 0xFFFFFF;
+    public final String buttonID;
     public String customName = "";
     public String toolText = "";
     public String chatCommand = "";
     public KeyBinding keyBinding;
 
     public static MacroButton clickedBtn;
-    public static List<MacroButton> macroButtonList = new ArrayList<MacroButton>();
 
-    public MacroButton(LiteralText text, String hoverText) {
-        super(text);
-        this.toolText = hoverText;
-        addTooltip(new TooltipBuilder());
-        macroButtonList.add(this);
-        this.buttonColor = 0xFFFFFF;
-        this.defaultName = this.getLabel().getString();
-        this.customName = this.defaultName;
-        loadButton();
+    public MacroButton(String buttonID) {
+        this.buttonID = buttonID;
+        this.setLabel(Text.of(""));
+        addTooltip(new TooltipBuilder()); // display hovertext
+
+        loadButton(); // loads saved values
 
         this.setOnClick(() -> {
             if (MacroGUI.configToggle.getToggle()) {
@@ -60,7 +54,6 @@ public class MacroButton extends WButton {
                     MinecraftClient.getInstance().player.sendChatMessage(chatCommand);
                     MinecraftClient.getInstance().player.closeScreen();
                 }
-
             }
         });
     }
@@ -126,7 +119,7 @@ public class MacroButton extends WButton {
 
             Iterator<JSONObject> iterator = jsonArray.iterator();
             while(iterator.hasNext()) {
-                JSONObject jobj = (JSONObject) iterator.next().get(this.getLabel().getString());
+                JSONObject jobj = (JSONObject) iterator.next().get(this.buttonID);
                 if (jobj != null) {
                     this.toolText = (String) jobj.get("hover-text");
                     this.chatCommand = (String) jobj.get("chat-command");
@@ -151,6 +144,5 @@ public class MacroButton extends WButton {
             e.printStackTrace();
         }
     }
-
 
 }

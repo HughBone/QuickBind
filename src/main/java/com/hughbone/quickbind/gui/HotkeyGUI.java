@@ -4,7 +4,6 @@ import com.hughbone.quickbind.Main;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.resource.language.I18n;
@@ -40,22 +39,35 @@ public class HotkeyGUI extends LightweightGuiDescription {
         root = new WGridPanel();
         root.add(scrollPanel, 0, 0, 17, 9);
 
-        root.add(new NormalButton(Text.of("SEARCH")), 0, 9, 2,1);
+        root.add(new NormalButton(Text.of("Search")), 0, 9, 2,1);
+
+        WButton resetBtn = new WButton(Text.of("Reset"));
+        root.add(resetBtn, 4, 9, 2,1);
+        resetBtn.setOnClick(() -> {
+            selectText.setText(Text.of("None Selected."));
+        });
+
         searchField = new WTextField();
         searchField.setMaxLength(16);
         root.add(searchField, 0, 10, 6,1);
 
         selectText.setText(Text.of("None Selected."));
         selectText.setColor(16777215);
+        if (MacroButton.clickedBtn.keyBinding != null) {
+            selectText.setText(Text.of(I18n.translate(MacroButton.clickedBtn.keyBinding.getTranslationKey())));
+        }
         root.add(selectText, 7, 10, 7, 1);
 
         WButton applyButton = new WButton(Text.of("APPLY"));
         root.add(applyButton, 15, 10, 2,1);
         applyButton.setOnClick(() -> {
-            if (!selectText.getText().equals("None Selected.")) {
-                ConfigGUI.keyBinding = HotkeyGUI.selectedButton.keyBinding;
-                MinecraftClient.getInstance().openScreen(new GUIScreen(new ConfigGUI(true)));
+            if (selectText.getText().getString().equals("None Selected.")) {
+                ConfigGUI.keyBinding = null;
             }
+            else if (HotkeyGUI.selectedButton != null) {
+                ConfigGUI.keyBinding = HotkeyGUI.selectedButton.keyBinding;
+            }
+            MinecraftClient.getInstance().openScreen(new GUIScreen(new ConfigGUI(true)));
         });
 
         setRootPanel(root);

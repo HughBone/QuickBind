@@ -1,6 +1,5 @@
 package com.hughbone.quickbind.gui;
 
-import com.hughbone.quickbind.SaveJson;
 import io.github.cottonmc.cotton.gui.widget.WButton;
 import io.github.cottonmc.cotton.gui.widget.WGridPanel;
 import io.github.cottonmc.cotton.gui.widget.WScrollPanel;
@@ -18,7 +17,7 @@ public class NormalButton extends WButton {
                 MinecraftClient.getInstance().openScreen(new GUIScreen(new HotkeyGUI()));
             }
 
-            else if (this.getLabel().getString().equals("SEARCH")) {
+            else if (this.getLabel().getString().equals("Search")) {
                 HotkeyGUI.root.remove(HotkeyGUI.scrollPanel);
                 WGridPanel panel = new WGridPanel();
 

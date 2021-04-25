@@ -1,6 +1,7 @@
 package com.hughbone.quickbind;
 
 import com.hughbone.quickbind.gui.MacroButton;
+import com.hughbone.quickbind.gui.MacroGUI;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -10,7 +11,7 @@ import java.io.FileWriter;
 public class SaveJson {
     public static void save() {
         JSONArray jsonArray = new JSONArray();
-        for (MacroButton mb : MacroButton.macroButtonList) {
+        for (MacroButton mb : MacroGUI.macroBtnList) {
             try {
                 JSONObject buttonField = new JSONObject();
                 buttonField.put("customname", mb.customName);
@@ -22,7 +23,7 @@ public class SaveJson {
                 }
 
                 JSONObject buttonObject = new JSONObject();
-                buttonObject.put(mb.defaultName, buttonField);
+                buttonObject.put(mb.buttonID, buttonField);
                 jsonArray.add(buttonObject);
 
             } catch (Exception e){
