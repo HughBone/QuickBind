@@ -15,6 +15,9 @@ repositories {
 		name = "CottonMC"
 		url = "https://server.bbkr.space/artifactory/libs-release"
 	}
+	maven {
+		url 'https://masa.dy.fi/maven'
+	}
 	jcenter()
 }
 
@@ -31,9 +34,7 @@ dependencies {
 	compile group: 'com.alibaba', name: 'fastjson', version: '1.2.56'
 	compile 'com.googlecode.json-simple:json-simple:1.1.1'
 
-
 	implementation 'com.cedarsoftware:json-io:4.10.1'
-
 	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
 
 	// includes
@@ -41,6 +42,9 @@ dependencies {
 	include 'com.googlecode.json-simple:json-simple:1.1.1'
 	include 'com.cedarsoftware:json-io:4.10.1'
 	include "io.github.cottonmc:LibGui:3.2.2+1.16.3"
+
+	// Malilib
+	modCompile "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version_malilib}:${project.malilib_version}"
 
 
 	// PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
