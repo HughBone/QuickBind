@@ -7,6 +7,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.options.GameOptions;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.lwjgl.glfw.GLFW;
@@ -25,12 +26,12 @@ public class Main implements ModInitializer {
     }
 
     private void assignGuiToKey() {
-        // Currently assigns to the G key
+
+        // Open quickbind keybind
         KeyBinding keyBinding = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-                "key.quickbind.opengui", // The translation key of the keybinding's name
-                InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
-                GLFW.GLFW_KEY_G, // The keycode of the key
-                "gui.quickbind.buttons" // The translation key of the keybinding's category.
+                "key.quickbind.opengui",
+                InputUtil.UNKNOWN_KEY.getCode(),
+                "quickbind.category" // The translation key of the keybinding's category.
         ));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
