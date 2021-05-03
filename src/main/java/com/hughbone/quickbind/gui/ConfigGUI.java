@@ -1,6 +1,7 @@
 package com.hughbone.quickbind.gui;
 
 import com.hughbone.quickbind.SaveJson;
+import fi.dy.masa.malilib.hotkeys.IHotkey;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.WButton;
@@ -15,12 +16,18 @@ import net.minecraft.text.Text;
 public class ConfigGUI extends LightweightGuiDescription {
 
     public static KeyBinding keyBinding;
+    public static IHotkey malibKeyBinding;
     private static ConfigTextField nameTextField;
     private static ConfigTextField hoverTextField;
     private static ConfigTextField colorTextField;
     private static ConfigTextField chatCommandTextField;
 
     public ConfigGUI(boolean fillPrevForms) {
+        if (!fillPrevForms) {
+            keyBinding = MacroButton.clickedBtn.keyBinding;
+            malibKeyBinding = MacroButton.clickedBtn.malibKeyBinding;
+        }
+
         WGridPanel root = new WGridPanel();
 
         root.add(new WText(Text.of("Name: ")).setColor(16777215), 0, 1, 3, 1);
@@ -49,9 +56,17 @@ public class ConfigGUI extends LightweightGuiDescription {
             keybindText.setText(Text.of(I18n.translate(MacroButton.clickedBtn.keyBinding.getTranslationKey())));
             root.add(keybindText, 8, 7, 8, 1);
         }
+        else if (MacroButton.clickedBtn.malibKeyBinding != null) {
+            keybindText.setText(Text.of(MacroButton.clickedBtn.malibKeyBinding.getConfigGuiDisplayName()));
+            root.add(keybindText, 8, 7, 8, 1);
+        }
         if (fillPrevForms) {
             if (keyBinding != null) {
                 keybindText.setText(Text.of(I18n.translate(keyBinding.getTranslationKey())));
+                root.add(keybindText, 8, 7, 8, 1);
+            }
+            else if (malibKeyBinding != null) {
+                keybindText.setText(Text.of(malibKeyBinding.getConfigGuiDisplayName()));
                 root.add(keybindText, 8, 7, 8, 1);
             }
             else {
@@ -67,6 +82,7 @@ public class ConfigGUI extends LightweightGuiDescription {
             chatCommandTextField.setText("");
             colorTextField.setText("ffffff");
             keyBinding = null;
+            malibKeyBinding = null;
             keybindText.setText(Text.of(""));
         });
 
@@ -79,6 +95,7 @@ public class ConfigGUI extends LightweightGuiDescription {
             MacroButton.clickedBtn.toolText = hoverTextField.getText();
             MacroButton.clickedBtn.chatCommand = chatCommandTextField.getText();
             MacroButton.clickedBtn.keyBinding = keyBinding;
+            MacroButton.clickedBtn.malibKeyBinding = malibKeyBinding;
 
             try {
                 MacroButton.clickedBtn.buttonColor = (int)((long)(Long.decode("0x" + colorTextField.getText())));

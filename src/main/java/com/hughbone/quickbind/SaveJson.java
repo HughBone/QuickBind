@@ -21,6 +21,9 @@ public class SaveJson {
                 if (mb.keyBinding != null) {
                     buttonField.put("hotkey", mb.keyBinding.getTranslationKey());
                 }
+                else if (mb.malibKeyBinding != null) {
+                    buttonField.put("malibkey", mb.malibKeyBinding.getName());
+                }
 
                 JSONObject buttonObject = new JSONObject();
                 buttonObject.put(mb.buttonID, buttonField);

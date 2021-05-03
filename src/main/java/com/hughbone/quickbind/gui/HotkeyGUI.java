@@ -1,6 +1,8 @@
 package com.hughbone.quickbind.gui;
 
 import com.hughbone.quickbind.Main;
+import fi.dy.masa.malilib.event.InputEventHandler;
+import fi.dy.masa.malilib.hotkeys.IHotkey;
 import io.github.cottonmc.cotton.gui.client.BackgroundPainter;
 import io.github.cottonmc.cotton.gui.client.LightweightGuiDescription;
 import io.github.cottonmc.cotton.gui.widget.*;
@@ -31,8 +33,16 @@ public class HotkeyGUI extends LightweightGuiDescription {
             if (key.contains("key.hotbar.") || key.equals("key.right") || key.equals("key.left") || key.equals("key.forward") || key.equals("key.back")) {
                 continue;
             }
-            panel.add(new HotkeyButton(Text.of(I18n.translate(keyBinding.getTranslationKey())), keyBinding), 0, y, 14, 1);
+            panel.add(new HotkeyButton(Text.of(I18n.translate(keyBinding.getTranslationKey())), keyBinding, null), 0, y, 14, 1);
             y++;
+        }
+
+        for (int i = 0; i < InputEventHandler.getKeybindManager().getKeybindCategories().size(); i++) {
+            for (int j = 0; j < InputEventHandler.getKeybindManager().getKeybindCategories().get(i).getHotkeys().size(); j++ ) {
+                IHotkey mKey = InputEventHandler.getKeybindManager().getKeybindCategories().get(i).getHotkeys().get(j);
+                panel.add(new HotkeyButton(Text.of(mKey.getConfigGuiDisplayName()), null, mKey), 0, y, 14, 1);
+                y++;
+            }
         }
 
         scrollPanel = new WScrollPanel(panel);
@@ -43,6 +53,7 @@ public class HotkeyGUI extends LightweightGuiDescription {
 
         WButton resetBtn = new WButton(Text.of("Reset"));
         root.add(resetBtn, 4, 9, 2,1);
+
         resetBtn.setOnClick(() -> {
             selectText.setText(Text.of("None Selected."));
         });
@@ -53,19 +64,29 @@ public class HotkeyGUI extends LightweightGuiDescription {
 
         selectText.setText(Text.of("None Selected."));
         selectText.setColor(16777215);
-        if (MacroButton.clickedBtn.keyBinding != null) {
-            selectText.setText(Text.of(I18n.translate(MacroButton.clickedBtn.keyBinding.getTranslationKey())));
+        if (ConfigGUI.keyBinding != null) {
+            selectText.setText(Text.of(I18n.translate(ConfigGUI.keyBinding.getTranslationKey())));
+        }
+        else if (ConfigGUI.malibKeyBinding != null) {
+            selectText.setText(Text.of(ConfigGUI.malibKeyBinding.getConfigGuiDisplayName()));
         }
         root.add(selectText, 7, 10, 7, 1);
 
         WButton applyButton = new WButton(Text.of("APPLY"));
         root.add(applyButton, 15, 10, 2,1);
+
         applyButton.setOnClick(() -> {
             if (selectText.getText().getString().equals("None Selected.")) {
                 ConfigGUI.keyBinding = null;
+                ConfigGUI.malibKeyBinding = null;
             }
             else if (HotkeyGUI.selectedButton != null) {
-                ConfigGUI.keyBinding = HotkeyGUI.selectedButton.keyBinding;
+                if (HotkeyGUI.selectedButton.keyBinding != null) {
+                    ConfigGUI.keyBinding = HotkeyGUI.selectedButton.keyBinding;
+                }
+                else if (HotkeyGUI.selectedButton.malibKeyBinding != null) {
+                    ConfigGUI.malibKeyBinding = HotkeyGUI.selectedButton.malibKeyBinding;
+                }
             }
             MinecraftClient.getInstance().openScreen(new GUIScreen(new ConfigGUI(true)));
         });

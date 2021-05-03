@@ -2,6 +2,8 @@ package com.hughbone.quickbind.gui;
 
 import com.hughbone.quickbind.KeyExt;
 import com.hughbone.quickbind.Main;
+import fi.dy.masa.malilib.event.InputEventHandler;
+import fi.dy.masa.malilib.hotkeys.*;
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
 import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
@@ -30,6 +32,7 @@ public class MacroButton extends WButton {
     public String toolText = "";
     public String chatCommand = "";
     public KeyBinding keyBinding;
+    public IHotkey malibKeyBinding;
 
     public static MacroButton clickedBtn;
 
@@ -41,18 +44,24 @@ public class MacroButton extends WButton {
         loadButton(); // loads saved values
 
         this.setOnClick(() -> {
+
             if (MacroGUI.configToggle.getToggle()) {
                 clickedBtn = this;
                 MinecraftClient.getInstance().openScreen(new GUIScreen(new ConfigGUI(false)));
             }
             else {
-                if (keyBinding != null) {
+                if (!chatCommand.equals("")) {
+                    MinecraftClient.getInstance().player.closeScreen();
+                    MinecraftClient.getInstance().player.sendChatMessage(chatCommand);
+                }
+                if (malibKeyBinding != null) {
+                    MinecraftClient.getInstance().player.closeScreen();
+                    KeybindMulti kbm = (KeybindMulti) malibKeyBinding.getKeybind();
+                    kbm.getCallback().onKeyAction(KeyAction.PRESS, kbm);
+                }
+                else if (keyBinding != null) {
                     MinecraftClient.getInstance().player.closeScreen();
                     ((KeyExt) keyBinding).pressKey();
-                }
-                if (!chatCommand.equals("")) {
-                    MinecraftClient.getInstance().player.sendChatMessage(chatCommand);
-                    MinecraftClient.getInstance().player.closeScreen();
                 }
             }
         });
@@ -126,17 +135,30 @@ public class MacroButton extends WButton {
                     this.buttonColor = (int) ((long)jobj.get("color"));
                     this.customName = (String) jobj.get("customname");
                     this.setLabel(Text.of(customName));
-
+                    // Get normal hotkey
                     String hotkey = (String) jobj.get("hotkey");
-                    Iterator var0 = Main.keyBindings.values().iterator();
-                    while(var0.hasNext()) {
-                        KeyBinding keyBinding = (KeyBinding) var0.next();
-                        if (keyBinding.getTranslationKey().equals(hotkey)) {
-                            this.keyBinding = keyBinding;
-                            break;
+                    if (hotkey != null) {
+                        Iterator var0 = Main.keyBindings.values().iterator();
+                        while(var0.hasNext()) {
+                            KeyBinding keyBinding = (KeyBinding) var0.next();
+                            if (keyBinding.getTranslationKey().equals(hotkey)) {
+                                this.keyBinding = keyBinding;
+                                return;
+                            }
                         }
                     }
-                    break;
+                    // Get malilib hotkey
+                    String malibKey = (String) jobj.get("malibkey");
+                    if (malibKey != null) {
+                        for (int i = 0; i < InputEventHandler.getKeybindManager().getKeybindCategories().size(); i++) {
+                            for (int j = 0; j < InputEventHandler.getKeybindManager().getKeybindCategories().get(i).getHotkeys().size(); j++ ) {
+                                if (InputEventHandler.getKeybindManager().getKeybindCategories().get(i).getHotkeys().get(j).getName().equals(malibKey)) {
+                                    this.malibKeyBinding = InputEventHandler.getKeybindManager().getKeybindCategories().get(i).getHotkeys().get(j);
+                                    return;
+                                }
+                            }
+                        }
+                    }
 
                 }
             }
@@ -144,5 +166,4 @@ public class MacroButton extends WButton {
             e.printStackTrace();
         }
     }
-
 }
