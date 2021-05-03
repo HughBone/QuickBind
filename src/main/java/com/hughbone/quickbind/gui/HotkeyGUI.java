@@ -26,6 +26,7 @@ public class HotkeyGUI extends LightweightGuiDescription {
         WGridPanel panel = new WGridPanel();
         HotkeyButton.hotkeyButtonList.clear();
         int y = 0;
+        // show regular hotkeys
         Iterator var0 = Main.keyBindings.values().iterator();
         while(var0.hasNext()) {
             KeyBinding keyBinding = (KeyBinding) var0.next();
@@ -36,7 +37,7 @@ public class HotkeyGUI extends LightweightGuiDescription {
             panel.add(new HotkeyButton(Text.of(I18n.translate(keyBinding.getTranslationKey())), keyBinding, null), 0, y, 14, 1);
             y++;
         }
-
+        // show malib hotkeys
         for (int i = 0; i < InputEventHandler.getKeybindManager().getKeybindCategories().size(); i++) {
             for (int j = 0; j < InputEventHandler.getKeybindManager().getKeybindCategories().get(i).getHotkeys().size(); j++ ) {
                 IHotkey mKey = InputEventHandler.getKeybindManager().getKeybindCategories().get(i).getHotkeys().get(j);
@@ -47,7 +48,13 @@ public class HotkeyGUI extends LightweightGuiDescription {
 
         scrollPanel = new WScrollPanel(panel);
         root = new WGridPanel();
-        root.add(scrollPanel, 0, 0, 17, 9);
+        root.add(scrollPanel, 0, 0, 16, 9);
+
+        NormalButton backButton = new NormalButton(Text.of("←"));
+        root.add(backButton, 17, 0);
+        backButton.setOnClick(() -> {
+            MinecraftClient.getInstance().openScreen(new GUIScreen(new ConfigGUI(false)));
+        });
 
         root.add(new NormalButton(Text.of("Search")), 0, 9, 2,1);
 
