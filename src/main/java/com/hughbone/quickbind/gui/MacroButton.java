@@ -7,13 +7,13 @@ import fi.dy.masa.malilib.hotkeys.*;
 import io.github.cottonmc.cotton.gui.client.ScreenDrawing;
 import io.github.cottonmc.cotton.gui.widget.*;
 import io.github.cottonmc.cotton.gui.widget.data.HorizontalAlignment;
-import io.github.cottonmc.cotton.gui.widget.icon.Icon;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -45,6 +45,9 @@ public class MacroButton extends WButton {
             e.printStackTrace();
         }
 
+        this.color = this.buttonColor;
+        this.darkmodeColor = this.buttonColor;
+
         this.setOnClick(() -> {
             if (MacroGUI.configToggle.getToggle()) {
                 clickedBtn = this;
@@ -66,53 +69,48 @@ public class MacroButton extends WButton {
         });
     }
 
+
     @Override
     public void paint(MatrixStack matrices, int x, int y, int mouseX, int mouseY) {
-        boolean enabled = this.isEnabled();
-        Icon icon = this.getIcon();
-        Text label = this.getLabel();
-
-        boolean hovered = (mouseX >= 0 && mouseY >= 0 && mouseX < getWidth() && mouseY < getHeight());
+        boolean hovered = (mouseX>=0 && mouseY>=0 && mouseX<getWidth() && mouseY<getHeight());
         int state = 1; //1=regular. 2=hovered. 0=disabled.
-        if (!enabled) {
+        if (!isEnabled()) {
             state = 0;
         } else if (hovered || isFocused()) {
             state = 2;
         }
 
-        float px = 1 / 256f;
+        float px = 1/256f;
         float buttonLeft = 0 * px;
-        float buttonTop = (46 + (state * 20)) * px;
-        int halfWidth = getWidth() / 2;
-        if (halfWidth > 198) halfWidth = 198;
-        float buttonWidth = halfWidth * px;
-        float buttonHeight = 20 * px;
+        float buttonTop = (46 + (state*20)) * px;
+        int halfWidth = getWidth()/2;
+        if (halfWidth>198) halfWidth=198;
+        float buttonWidth = halfWidth*px;
+        float buttonHeight = 20*px;
 
-        float buttonEndLeft = (200 - (getWidth() / 2)) * px;
+        float buttonEndLeft = (200-(getWidth()/2)) * px;
 
-        ScreenDrawing.texturedRect(x, y, getWidth() / 2, 20,
-                AbstractButtonWidget.WIDGETS_LOCATION, buttonLeft, buttonTop, buttonLeft + buttonWidth, buttonTop + buttonHeight, buttonColor);
-        ScreenDrawing.texturedRect(x + (getWidth() / 2), y, getWidth() / 2, 20, AbstractButtonWidget.WIDGETS_LOCATION, buttonEndLeft, buttonTop, 200 * px, buttonTop + buttonHeight, buttonColor);
+        Identifier texture = ClickableWidget.WIDGETS_TEXTURE;
+        ScreenDrawing.texturedRect(matrices, x, y, getWidth()/2, 20, texture, buttonLeft, buttonTop, buttonLeft+buttonWidth, buttonTop+buttonHeight, buttonColor);
+        ScreenDrawing.texturedRect(matrices, x+(getWidth()/2), y, getWidth()/2, 20, texture, buttonEndLeft, buttonTop, 200*px, buttonTop+buttonHeight, buttonColor);
 
-        if (icon != null) {
-            icon.paint(matrices, x + 1, y + 1, 16);
+        if (getIcon() != null) {
+            getIcon().paint(matrices, x + 1, y + 1, 16);
         }
 
-
-        if (label != null) {
+        if (getLabel()!=null) {
             int color = 0xE0E0E0;
-            if (!enabled) {
+            if (!isEnabled()) {
                 color = 0xA0A0A0;
-            }
-            // text hover color
-            else if (hovered) {
-                //color = 16711680;
-            }
+            } /*else if (hovered) {
+				color = 0xFFFFA0;
+			}*/
 
-            int xOffset = (icon != null && alignment == HorizontalAlignment.LEFT) ? 18 : 0;
-            ScreenDrawing.drawStringWithShadow(matrices, label.asOrderedText(), alignment, x + xOffset, y + ((20 - 8) / 2), width, color); //LibGuiClient.config.darkMode ? darkmodeColor : color);
+            int xOffset = (getIcon() != null && alignment == HorizontalAlignment.LEFT) ? 18 : 0;
+            ScreenDrawing.drawStringWithShadow(matrices, getLabel().asOrderedText(), alignment, x + xOffset, y + ((20 - 8) / 2), width, color); //LibGuiClient.config.darkMode ? darkmodeColor : color);
         }
     }
+
 
     @Override
     public void addTooltip(TooltipBuilder tooltip) {
