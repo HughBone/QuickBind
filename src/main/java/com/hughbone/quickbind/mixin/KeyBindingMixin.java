@@ -2,7 +2,7 @@ package com.hughbone.quickbind.mixin;
 
 import com.hughbone.quickbind.KeyExt;
 import com.hughbone.quickbind.Main;
-import net.minecraft.client.options.KeyBinding;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

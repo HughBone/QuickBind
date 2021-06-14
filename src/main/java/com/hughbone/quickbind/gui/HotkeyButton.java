@@ -2,7 +2,7 @@ package com.hughbone.quickbind.gui;
 
 import fi.dy.masa.malilib.hotkeys.IHotkey;
 import io.github.cottonmc.cotton.gui.widget.WButton;
-import net.minecraft.client.options.KeyBinding;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.text.Text;
 
 import java.util.ArrayList;
