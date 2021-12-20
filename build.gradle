@@ -1,10 +1,10 @@
 plugins {
-	id 'fabric-loom' version '0.8-SNAPSHOT'
+	id 'fabric-loom' version '0.10-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_16
-targetCompatibility = JavaVersion.VERSION_16
+sourceCompatibility = JavaVersion.VERSION_17
+targetCompatibility = JavaVersion.VERSION_17
 
 archivesBaseName = project.archives_base_name
 version = project.mod_version
@@ -30,9 +30,9 @@ dependencies {
 
 	include 'com.googlecode.json-simple:json-simple:1.1.1'
 	modImplementation 'com.googlecode.json-simple:json-simple:1.1.1'
-	include "io.github.cottonmc:LibGui:4.0.0+1.17"
-	modImplementation "io.github.cottonmc:LibGui:4.0.0+1.17"
-	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.17.0:${project.malilib_version}"
+	include "io.github.cottonmc:LibGui:5.1.0+1.18"
+	modImplementation "io.github.cottonmc:LibGui:5.1.0+1.18"
+	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.18.0:${project.malilib_version}"
 }
 
 processResources {
@@ -60,21 +60,4 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 jar {
 	from "LICENSE"
-}
-
-// configure the maven publication
-publishing {
-	publications {
-		mavenJava(MavenPublication) {
-			// add all the jars that should be included when publishing to maven
-			artifact(remapJar) {
-				builtBy remapJar
-			}
-			artifact(sourcesJar) {
-				builtBy remapSourcesJar
-			}
-		}
-	}
-
-
 }

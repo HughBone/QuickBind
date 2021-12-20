@@ -86,7 +86,7 @@ public class MacroGUI extends LightweightGuiDescription {
         altViewToggle.setColor(16777215, 16777215);
         altViewToggle.setOnToggle((e) -> {
             SaveJson.save();
-            MinecraftClient.getInstance().openScreen(new GUIScreen(new MacroGUI()));
+            MinecraftClient.getInstance().setScreenAndRender(new GUIScreen(new MacroGUI()));
         });
     }
 

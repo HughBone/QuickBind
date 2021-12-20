@@ -18,7 +18,7 @@ public class KeyBindingMixin implements KeyExt {
 
     @Shadow private boolean pressed;
     @Shadow private int timesPressed;
-    @Shadow @Final private static Map<String, KeyBinding> keysById;
+    @Shadow @Final private static Map<String, KeyBinding> KEYS_BY_ID;
 
     public void pressKey() {
         this.pressed = true;
@@ -27,6 +27,6 @@ public class KeyBindingMixin implements KeyExt {
 
     @Inject(method = "<init>(Ljava/lang/String;Lnet/minecraft/client/util/InputUtil$Type;ILjava/lang/String;)V", at = @At("TAIL"))
     public void KeyBinding(String translationKey, InputUtil.Type type, int code, String category, CallbackInfo ci) {
-        Main.keyBindings = keysById;
+        Main.keyBindings = KEYS_BY_ID;
     }
 }

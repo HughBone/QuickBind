@@ -54,7 +54,7 @@ public class HotkeyGUI extends LightweightGuiDescription {
         NormalButton backButton = new NormalButton(Text.of("←"));
         root.add(backButton, 17, 0);
         backButton.setOnClick(() -> {
-            MinecraftClient.getInstance().openScreen(new GUIScreen(new ConfigGUI(false)));
+            MinecraftClient.getInstance().setScreenAndRender(new GUIScreen(new ConfigGUI(false)));
         });
 
         WButton resetBtn = new WButton(Text.of("Reset"));
@@ -94,7 +94,7 @@ public class HotkeyGUI extends LightweightGuiDescription {
                     ConfigGUI.malibKeyBinding = HotkeyGUI.selectedButton.malibKeyBinding;
                 }
             }
-            MinecraftClient.getInstance().openScreen(new GUIScreen(new ConfigGUI(true)));
+            MinecraftClient.getInstance().setScreenAndRender(new GUIScreen(new ConfigGUI(true)));
         });
 
         setRootPanel(root);

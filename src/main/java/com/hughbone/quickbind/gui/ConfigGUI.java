@@ -103,7 +103,7 @@ public class ConfigGUI extends LightweightGuiDescription {
                 e.printStackTrace();
             }
             SaveJson.save();
-            MinecraftClient.getInstance().openScreen(new GUIScreen(new MacroGUI()));
+            MinecraftClient.getInstance().setScreenAndRender(new GUIScreen(new MacroGUI()));
         });
 
         setRootPanel(root);

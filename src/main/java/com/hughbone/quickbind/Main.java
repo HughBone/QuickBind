@@ -33,7 +33,7 @@ public class Main implements ModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             while (keyBinding.wasPressed()) {
-                MinecraftClient.getInstance().openScreen(new GUIScreen(new MacroGUI()));
+                MinecraftClient.getInstance().setScreenAndRender(new GUIScreen(new MacroGUI()));
             }
         });
     }

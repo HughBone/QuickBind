@@ -14,7 +14,7 @@ public class NormalButton extends WButton {
         this.setOnClick(() -> {
 
             if (this.getLabel().getString().equals("[Select]")) {
-                MinecraftClient.getInstance().openScreen(new GUIScreen(new HotkeyGUI()));
+                MinecraftClient.getInstance().setScreenAndRender(new GUIScreen(new HotkeyGUI()));
             }
 
         });

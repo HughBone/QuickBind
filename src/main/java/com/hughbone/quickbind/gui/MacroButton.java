@@ -51,7 +51,7 @@ public class MacroButton extends WButton {
         this.setOnClick(() -> {
             if (MacroGUI.configToggle.getToggle()) {
                 clickedBtn = this;
-                MinecraftClient.getInstance().openScreen(new GUIScreen(new ConfigGUI(false)));
+                MinecraftClient.getInstance().setScreenAndRender(new GUIScreen(new ConfigGUI(false)));
             } else {
                 if (!chatCommand.equals("")) {
                     MinecraftClient.getInstance().player.closeScreen();
