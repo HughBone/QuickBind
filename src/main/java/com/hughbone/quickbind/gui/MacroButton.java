@@ -11,7 +11,7 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.json.simple.JSONArray;
@@ -55,7 +55,7 @@ public class MacroButton extends WButton {
             } else {
                 if (!chatCommand.equals("")) {
                     MinecraftClient.getInstance().player.closeScreen();
-                    MinecraftClient.getInstance().player.sendChatMessage(chatCommand);
+                    MinecraftClient.getInstance().player.sendChatMessage(chatCommand, null);
                 }
                 if (malibKeyBinding != null) {
                     MinecraftClient.getInstance().player.closeScreen();
@@ -115,7 +115,7 @@ public class MacroButton extends WButton {
     @Override
     public void addTooltip(TooltipBuilder tooltip) {
         if (!toolText.equals("")) {
-            tooltip.add(new LiteralText(toolText));
+            tooltip.add(Text.of(toolText));
         }
     }
 

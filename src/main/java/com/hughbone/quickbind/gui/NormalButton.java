@@ -3,7 +3,6 @@ package com.hughbone.quickbind.gui;
 import io.github.cottonmc.cotton.gui.widget.TooltipBuilder;
 import io.github.cottonmc.cotton.gui.widget.WButton;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 
 public class NormalButton extends WButton {
@@ -23,7 +22,7 @@ public class NormalButton extends WButton {
     @Override
     public void addTooltip(TooltipBuilder tooltip) {
         if (this.getLabel().getString().equals("←")) {
-            tooltip.add(new LiteralText("Go back"));
+            tooltip.add(Text.of("Go back"));
         }
     }
 

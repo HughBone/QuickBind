@@ -20,8 +20,8 @@ import java.util.List;
 public class MacroGUI extends LightweightGuiDescription {
 
     private WGridPanel root = new WGridPanel();
-    public static WToggleButton configToggle = new WToggleButton(new TranslatableText("Config"));
-    public static WToggleButton altViewToggle = new WToggleButton(new LiteralText("ShowAltView"));
+    public static WToggleButton configToggle = new WToggleButton(Text.of("Config"));
+    public static WToggleButton altViewToggle = new WToggleButton(Text.of("ShowAltView"));
     public static List<MacroButton> macroBtnList;
 
     public MacroGUI() {
@@ -77,7 +77,7 @@ public class MacroGUI extends LightweightGuiDescription {
     }
 
     private void addCloseButton() {
-        WButton escButton = new WButton(new TranslatableText("x"));
+        WButton escButton = new WButton(Text.of("x"));
         escButton.setOnClick(() -> MinecraftClient.getInstance().player.closeScreen());
         root.add(escButton, 15, 0, 2, 2);
     }

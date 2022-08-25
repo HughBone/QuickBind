@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '0.10-SNAPSHOT'
+	id 'fabric-loom' version '0.12-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -30,9 +30,9 @@ dependencies {
 
 	include 'com.googlecode.json-simple:json-simple:1.1.1'
 	modImplementation 'com.googlecode.json-simple:json-simple:1.1.1'
-	include "io.github.cottonmc:LibGui:5.1.0+1.18"
-	modImplementation "io.github.cottonmc:LibGui:5.1.0+1.18"
-	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.18.0:${project.malilib_version}"
+	include "io.github.cottonmc:LibGui:6.0.1+1.19"
+	modImplementation "io.github.cottonmc:LibGui:6.0.1+1.19"
+	modImplementation "fi.dy.masa.malilib:malilib-fabric-1.19.2:${project.malilib_version}"
 }
 
 processResources {
