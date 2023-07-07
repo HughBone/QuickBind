@@ -55,8 +55,16 @@ public class MacroButton extends WButton {
             } else {
                 if (!chatCommand.equals("")) {
                     MinecraftClient.getInstance().player.closeScreen();
-                    MinecraftClient.getInstance().player.sendChatMessage(chatCommand, null);
-                }
+                if （chatCommand.replace（“\\\\n”， “\\n”）.startsWith（“/”）） {
+
+MinecraftClient.getInstance（）.player.sendCommand（chatCommand.replace（“\\\\n”， “\\n”）.substring（1）， null）;
+
+} else {
+
+MinecraftClient.getInstance（）.player.sendChatMessage（chatCommand.replace（“\\\\n”， “\\n”）， null）;
+
+                    }    
+                
                 if (malibKeyBinding != null) {
                     MinecraftClient.getInstance().player.closeScreen();
                     KeybindMulti kbm = (KeybindMulti) malibKeyBinding.getKeybind();
